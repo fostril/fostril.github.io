@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const mysql = require('mysql2');
 const session = require('express-session');
 const path = require('path');
@@ -137,3 +137,6 @@ app.get('/redirect.html', checkLoggedIn, (req, res) => {
 });
 
 
+app.listen(port, () => {
+    console.log(`Server listening at http://localhost:${port}`);
+});
