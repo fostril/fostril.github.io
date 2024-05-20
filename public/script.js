@@ -35,23 +35,21 @@ document.addEventListener('DOMContentLoaded', function() {
         fetch('/login', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+              'Content-Type': 'application/json',
             },
-            body: JSON.stringify({email: email, password: password}),
+            body: JSON.stringify({ email: email, password: password })
         })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'ok') {
-                alert('Login successful');
-                window.location.href = data.redirectUrl; // Use the URL sent from the server
+              window.location.href = data.redirectUrl;  // Redirect on successful login
+            } else if (data.redirectUrl) {
+              window.location.href = data.redirectUrl;  // Redirect to subscribe if necessary
             } else {
-                alert('Login failed: ' + data.message);
+              alert(data.message);  // Show error message otherwise
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('Login error. Please try again later.');
-        });
+        .catch(error => console.error('Error:', error));
     }    
 
     // Function to perform registration

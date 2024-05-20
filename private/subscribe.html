@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscribe</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="subscribe-container">
+        <h1>Subscribe to Our Service</h1>
+        <p>Subscription Cost: $10/month</p>
+        <button onclick="subscribe()">Subscribe Now</button>
+    </div>
+    <script>
+        function subscribe() {
+            fetch('/subscribe', {
+                method: 'POST',
+                credentials: 'include' // Include cookies to maintain session
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    window.location.href = data.redirectUrl;
+                } else {
+                    // Providing more intuitive feedback to the user
+                    alert('Failed to subscribe: ' + data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while trying to subscribe. Please try again later.');
+            });
+        }
+    </script>
+    
+</body>
+</html>
