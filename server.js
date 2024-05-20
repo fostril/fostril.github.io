@@ -136,6 +136,4 @@ app.get('/redirect.html', checkLoggedIn, (req, res) => {
     res.sendFile(path.join(__dirname, 'private', 'redirect.html'));
 });
 
-app.listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}`);
-});
+
